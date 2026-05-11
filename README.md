@@ -1,9 +1,9 @@
-# SIAKAD Lite 🎓
+# DUA UNRI 🎓
 
 > **Capstone Project — Praktikum Algoritma Pemrograman & Struktur Data**
 > Universitas Riau (UNRI) - Kelompok 2
 
-SIAKAD Lite adalah aplikasi simulasi Sistem Informasi Akademik berbasis terminal (CLI) yang dibangun menggunakan Python. Proyek ini tidak hanya berfokus pada fungsionalitas sistem akademik dasar, tetapi juga mendemonstrasikan pemahaman mendalam tentang implementasi berbagai **Struktur Data dan Algoritma** secara manual (tanpa *library* eksternal) sesuai dengan rubrik penilaian praktikum.
+DUA UNRI adalah aplikasi simulasi Sistem Informasi Akademik berbasis terminal (CLI) yang dibangun menggunakan Python. Proyek ini tidak hanya berfokus pada fungsionalitas sistem akademik dasar, tetapi juga mendemonstrasikan pemahaman mendalam tentang implementasi berbagai **Struktur Data dan Algoritma** secara manual (tanpa *library* eksternal) sesuai dengan rubrik penilaian praktikum.
 
 ---
 
