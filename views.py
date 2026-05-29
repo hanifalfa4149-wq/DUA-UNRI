@@ -1,25 +1,12 @@
 """Menu CLI untuk SIAKAD Lite."""
 
-from services import (
-    tambah_mahasiswa,
-    lihat_semua_mahasiswa,
-    cari_nim,
-    cari_nama,
-    sort_mahasiswa,
-    hapus_mahasiswa,
-    tambah_matkul,
-    lihat_semua_matkul,
-    tambah_prasyarat,
-    lihat_prasyarat,
-    ajukan_krs,
-    proses_krs,
-    lihat_krs,
-    input_nilai,
-    lihat_nilai,
-    hitung_ipk_mahasiswa,
-    catat_log,
-    tampil_log,
-)
+from services import (ajukan_krs, cari_nama, cari_nim, catat_log,
+                      hapus_mahasiswa, hitung_ipk_mahasiswa, input_nilai,
+                      jelajahi_mahasiswa, lihat_krs, lihat_nilai,
+                      lihat_prasyarat, lihat_semua_mahasiswa,
+                      lihat_semua_matkul, proses_krs, sort_mahasiswa,
+                      tambah_mahasiswa, tambah_matkul, tambah_node_tree,
+                      tambah_prasyarat, tampil_log, tampil_tree)
 
 
 def _header(title):
@@ -66,7 +53,7 @@ def menu_mahasiswa():
     while True:
         _header("Menu Mahasiswa")
         print(
-            "1. Tambah\n2. Lihat Semua\n3. Cari NIM\n4. Cari Nama\n5. Sort\n6. Hapus\n0. Kembali"
+            "1. Tambah\n2. Lihat Semua\n3. Cari NIM\n4. Cari Nama\n5. Sort\n6. Hapus\n7. Jelajahi Data (Circular)\n0. Kembali"
         )
         pilihan = _read_int("Pilih: ")
         if pilihan is None:
@@ -132,6 +119,20 @@ def menu_mahasiswa():
                 _ok("Mahasiswa dihapus")
             else:
                 _fail("Gagal menghapus mahasiswa")
+        elif pilihan == 7:
+            data = jelajahi_mahasiswa()
+            if data:
+                idx = 0
+                while idx < len(data):
+                    print(data[idx])
+                    cmd = input("Enter=next, q=quit: ").strip().lower()
+                    if cmd == "q":
+                        break
+                    idx += 1
+                catat_log("Jelajahi mahasiswa circular")
+                _ok("Selesai jelajah")
+            else:
+                _fail("Data mahasiswa kosong")
         else:
             _fail("Menu tidak valid")
 
@@ -289,11 +290,47 @@ def menu_log():
         _fail("Log kosong")
 
 
+def menu_struktur_akademik():
+    """Menu struktur akademik (Tree)."""
+    while True:
+        _header("Menu Struktur Akademik")
+        print("1. Tambah Node\n2. Tampilkan Hierarki\n0. Kembali")
+        pilihan = _read_int("Pilih: ")
+        if pilihan is None:
+            continue
+        if pilihan == 0:
+            return
+        if pilihan == 1:
+            parent = _read_str("Parent: ")
+            child = _read_str("Child: ")
+            if tambah_node_tree(parent, child):
+                catat_log(f"Tambah node tree {parent}->{child}")
+                _ok("Node ditambahkan")
+            else:
+                _fail("Gagal menambah node")
+        elif pilihan == 2:
+            data = tampil_tree()
+            if data:
+                if isinstance(data, list):
+                    for item in data:
+                        print(item)
+                else:
+                    print(data)
+                catat_log("Tampilkan struktur akademik")
+                _ok("Hierarki ditampilkan")
+            else:
+                _fail("Struktur akademik kosong")
+        else:
+            _fail("Menu tidak valid")
+
+
 def menu_utama():
     """Menu utama aplikasi."""
     while True:
         _header("SIAKAD Lite")
-        print("1. Mahasiswa\n2. Mata Kuliah\n3. KRS\n4. Nilai\n5. Log\n0. Keluar")
+        print(
+            "1. Mahasiswa\n2. Mata Kuliah\n3. KRS\n4. Nilai\n5. Log\n6. Struktur Akademik\n0. Keluar"
+        )
         pilihan = _read_int("Pilih: ")
         if pilihan is None:
             continue
@@ -310,6 +347,8 @@ def menu_utama():
             menu_nilai()
         elif pilihan == 5:
             menu_log()
+        elif pilihan == 6:
+            menu_struktur_akademik()
         else:
             _fail("Menu tidak valid")
 
