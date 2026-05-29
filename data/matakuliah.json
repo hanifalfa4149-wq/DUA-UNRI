@@ -1,0 +1,34 @@
+[
+  {
+    "kode": "MK001",
+    "nama": "Dasar Pemrograman",
+    "sks": 3,
+    "semester": 1,
+    "tipe": "wajib",
+    "prasyarat": []
+  },
+  {
+    "kode": "MK002",
+    "nama": "Matematika Diskrit",
+    "sks": 3,
+    "semester": 2,
+    "tipe": "wajib",
+    "prasyarat": []
+  },
+  {
+    "kode": "MK003",
+    "nama": "Algoritma & Struktur Data",
+    "sks": 3,
+    "semester": 3,
+    "tipe": "wajib",
+    "prasyarat": ["MK001", "MK002"]
+  },
+  {
+    "kode": "MK004",
+    "nama": "Basis Data",
+    "sks": 3,
+    "semester": 4,
+    "tipe": "wajib",
+    "prasyarat": ["MK001"]
+  }
+]

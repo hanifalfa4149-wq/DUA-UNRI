@@ -1,0 +1,120 @@
+{
+  "2201001": [
+    {
+      "nim": "2201001",
+      "kode_mk": "MK001",
+      "tugas": 85.0,
+      "uts": 80.0,
+      "uas": 88.0,
+      "nilai_akhir": 84.7,
+      "grade": "B"
+    },
+    {
+      "nim": "2201001",
+      "kode_mk": "MK002",
+      "tugas": 90.0,
+      "uts": 88.0,
+      "uas": 92.0,
+      "nilai_akhir": 90.2,
+      "grade": "A"
+    },
+    {
+      "nim": "2201001",
+      "kode_mk": "MK003",
+      "tugas": 78.0,
+      "uts": 75.0,
+      "uas": 80.0,
+      "nilai_akhir": 77.9,
+      "grade": "B"
+    }
+  ],
+  "2201002": [
+    {
+      "nim": "2201002",
+      "kode_mk": "MK001",
+      "tugas": 70.0,
+      "uts": 65.0,
+      "uas": 72.0,
+      "nilai_akhir": 69.3,
+      "grade": "C"
+    },
+    {
+      "nim": "2201002",
+      "kode_mk": "MK002",
+      "tugas": 60.0,
+      "uts": 55.0,
+      "uas": 62.0,
+      "nilai_akhir": 59.3,
+      "grade": "D"
+    }
+  ],
+  "2201003": [
+    {
+      "nim": "2201003",
+      "kode_mk": "MK001",
+      "tugas": 95.0,
+      "uts": 92.0,
+      "uas": 96.0,
+      "nilai_akhir": 94.5,
+      "grade": "A"
+    },
+    {
+      "nim": "2201003",
+      "kode_mk": "MK002",
+      "tugas": 88.0,
+      "uts": 85.0,
+      "uas": 90.0,
+      "nilai_akhir": 87.9,
+      "grade": "A"
+    },
+    {
+      "nim": "2201003",
+      "kode_mk": "MK003",
+      "tugas": 82.0,
+      "uts": 80.0,
+      "uas": 85.0,
+      "nilai_akhir": 82.6,
+      "grade": "B"
+    },
+    {
+      "nim": "2201003",
+      "kode_mk": "MK004",
+      "tugas": 91.0,
+      "uts": 89.0,
+      "uas": 93.0,
+      "nilai_akhir": 91.3,
+      "grade": "A"
+    }
+  ],
+  "2201004": [
+    {
+      "nim": "2201004",
+      "kode_mk": "MK001",
+      "tugas": 55.0,
+      "uts": 50.0,
+      "uas": 58.0,
+      "nilai_akhir": 54.7,
+      "grade": "D"
+    }
+  ],
+  "2301001": [
+    {
+      "nim": "2301001",
+      "kode_mk": "MK001",
+      "tugas": 75.0,
+      "uts": 72.0,
+      "uas": 78.0,
+      "nilai_akhir": 75.3,
+      "grade": "B"
+    },
+    {
+      "nim": "2301001",
+      "kode_mk": "MK002",
+      "tugas": 68.0,
+      "uts": 65.0,
+      "uas": 70.0,
+      "nilai_akhir": 67.9,
+      "grade": "C"
+    }
+  ]
+}
