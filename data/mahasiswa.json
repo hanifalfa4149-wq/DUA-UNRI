@@ -1,0 +1,32 @@
+[
+  {
+    "nim": "2201001",
+    "nama": "Andi Pratama",
+    "id_prodi": "TIF",
+    "angkatan": 2022
+  },
+  {
+    "nim": "2201002",
+    "nama": "Budi Santoso",
+    "id_prodi": "TIF",
+    "angkatan": 2022
+  },
+  {
+    "nim": "2201003",
+    "nama": "Citra Dewi",
+    "id_prodi": "TIF",
+    "angkatan": 2022
+  },
+  {
+    "nim": "2201004",
+    "nama": "Dian Rahmawati",
+    "id_prodi": "SIF",
+    "angkatan": 2022
+  },
+  {
+    "nim": "2301001",
+    "nama": "Eko Prasetyo",
+    "id_prodi": "TIF",
+    "angkatan": 2023
+  }
+]
