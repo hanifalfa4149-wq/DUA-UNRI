@@ -1,5 +1,5 @@
 """
-Tree dan Graph untuk SIAKAD Lite.
+Tree dan Graph untuk DUA UNRI.
 
 Tree  : hierarki Fakultas -> Prodi -> Mahasiswa, traversal pre-order.
 Graph : directed adjacency list untuk relasi prasyarat antar mata kuliah.
@@ -29,7 +29,7 @@ class Tree:
     """
     General Tree untuk merepresentasikan hierarki akademik.
 
-    Dipakai di SIAKAD Lite untuk menampilkan struktur:
+    Dipakai di DUA UNRI untuk menampilkan struktur:
         Fakultas -> Prodi -> Mahasiswa
     Struktur ini bersifat hierarkis natural sehingga Tree adalah
     pilihan yang tepat dibanding DS linear seperti LL atau Stack.
@@ -151,7 +151,7 @@ class Graph:
     """
     Directed Graph dengan adjacency list untuk relasi prasyarat mata kuliah.
 
-    Dipakai di SIAKAD Lite karena relasi prasyarat bersifat non-linear
+    Dipakai di DUA UNRI karena relasi prasyarat bersifat non-linear
     dan directed: MK003 -> MK001 berarti MK003 membutuhkan MK001,
     tapi tidak sebaliknya. Graph menangkap relasi ini secara natural.
 

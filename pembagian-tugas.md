@@ -1,4 +1,4 @@
-# Pembagian Tugas — SIAKAD Lite
+# Pembagian Tugas — DUA UNRI
 
 > Capstone Project · Praktikum Algoritma Pemrograman & Struktur Data · UNRI
 > 2 Minggu · 3 Orang
@@ -8,7 +8,7 @@
 ## Cara Baca Dokumen Ini
 
 Tiap orang punya section sendiri. Baca bagian kamu, pahami **done when**-nya,
-dan langsung eksekusi. Detail teknis lengkap ada di `docs/SIAKAD-PRD.md`.
+dan langsung eksekusi. Detail teknis lengkap ada di `docs/DUA UNRI-PRD.md`.
 
 ---
 
@@ -167,4 +167,4 @@ dan langsung eksekusi. Detail teknis lengkap ada di `docs/SIAKAD-PRD.md`.
 
 ---
 
-> Baca `docs/SIAKAD-PRD.md` untuk detail teknis lengkap.
+> Baca `docs/DUA UNRI-PRD.md` untuk detail teknis lengkap.

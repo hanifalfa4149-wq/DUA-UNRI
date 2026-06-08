@@ -1,5 +1,5 @@
 # structures/stack_queue.py
-# Anggota 1 — SIAKAD Lite Capstone Project
+# Anggota 1 — DUA UNRI Capstone Project
 # Stack dan Queue
 
 
@@ -11,7 +11,7 @@
 #
 #  Sifatnya: LIFO (Last In First Out)
 #
-#  Di SIAKAD, Stack dipakai untuk Activity Log:
+#  Di DUA UNRI, Stack dipakai untuk Activity Log:
 #  aksi yang paling baru tampil paling atas.
 #
 #  Visualisasi:
@@ -38,7 +38,7 @@ class StackNode:
 class Stack:
     """
     Stack — struktur data tumpukan dengan sifat LIFO.
-    Dipakai untuk activity log di SIAKAD Lite.
+    Dipakai untuk activity log di DUA UNRI.
     """
 
     def __init__(self):
@@ -105,7 +105,7 @@ class Stack:
 #
 #  Sifatnya: FIFO (First In First Out)
 #
-#  Di SIAKAD, Queue dipakai untuk antrian KRS:
+#  Di DUA UNRI, Queue dipakai untuk antrian KRS:
 #  mahasiswa yang daftar duluan, diproses duluan.
 #
 #  Visualisasi:
@@ -139,7 +139,7 @@ class QueueNode:
 class Queue:
     """
     Queue — struktur data antrian dengan sifat FIFO.
-    Dipakai untuk antrian pengajuan KRS di SIAKAD Lite.
+    Dipakai untuk antrian pengajuan KRS di DUA UNRI.
     """
 
     def __init__(self):

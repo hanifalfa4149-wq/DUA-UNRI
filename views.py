@@ -1,343 +1,435 @@
-"""Menu CLI untuk SIAKAD Lite."""
+"""Tampilan menu CLI untuk DUA UNRI."""
 
-from services import (ajukan_krs, cari_nama, cari_nim, catat_log,
-                      hapus_mahasiswa, hitung_ipk_mahasiswa, input_nilai,
-                      jelajahi_mahasiswa, lihat_krs, lihat_nilai,
-                      lihat_prasyarat, lihat_semua_mahasiswa,
-                      lihat_semua_matkul, proses_krs, sort_mahasiswa,
-                      tambah_mahasiswa, tambah_matkul, tambah_node_tree,
-                      tambah_prasyarat, tampil_log, tampil_tree)
+import services
 
 
-def _header(title):
-    """Cetak header menu."""
+# ---------------------------------------------------------------------------
+# Helper tampilan & input
+# ---------------------------------------------------------------------------
+
+def garis():
+    """Cetak garis pemisah."""
     print("=" * 40)
-    print(title)
 
 
-def _ok(msg):
+def sukses(pesan):
     """Cetak pesan sukses."""
-    print(f"✓ {msg}")
+    print(f"✓ {pesan}")
 
 
-def _fail(msg):
+def gagal(pesan):
     """Cetak pesan gagal."""
-    print(f"✗ {msg}")
+    print(f"✗ {pesan}")
 
 
-def _read_str(prompt):
-    """Baca input string dengan strip."""
+def tanya(prompt):
+    """Minta input teks dari user."""
     return input(prompt).strip()
 
 
-def _read_int(prompt):
-    """Baca input angka int dengan validasi."""
+def tanya_angka(prompt):
+    """Minta input angka bulat dari user, return None jika tidak valid."""
     try:
         return int(input(prompt).strip())
     except ValueError:
-        _fail("Input angka tidak valid")
+        gagal("Input harus berupa angka")
         return None
 
 
-def _read_float(prompt):
-    """Baca input angka float dengan validasi."""
+def tanya_desimal(prompt):
+    """Minta input angka desimal dari user, return None jika tidak valid."""
     try:
         return float(input(prompt).strip())
     except ValueError:
-        _fail("Input angka tidak valid")
+        gagal("Input harus berupa angka")
         return None
 
 
+# ---------------------------------------------------------------------------
+# Menu Mahasiswa
+# ---------------------------------------------------------------------------
+
 def menu_mahasiswa():
-    """Menu manajemen mahasiswa."""
+    """Menu untuk kelola data mahasiswa."""
     while True:
-        _header("Menu Mahasiswa")
-        print(
-            "1. Tambah\n2. Lihat Semua\n3. Cari NIM\n4. Cari Nama\n5. Sort\n6. Hapus\n7. Jelajahi Data (Circular)\n0. Kembali"
-        )
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("MENU MAHASISWA")
+        print("1. Tambah mahasiswa")
+        print("2. Lihat semua mahasiswa")
+        print("3. Cari mahasiswa by NIM")
+        print("4. Cari mahasiswa by nama")
+        print("5. Urutkan mahasiswa")
+        print("6. Hapus mahasiswa")
+        print("7. Jelajahi data (Circular LL)")
+        print("0. Kembali")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
             return
-        if pilihan == 1:
-            nim = _read_str("NIM: ")
-            nama = _read_str("Nama: ")
-            id_prodi = _read_str("ID Prodi: ")
-            angkatan = _read_int("Angkatan: ")
+
+        elif pilihan == 1:
+            nim      = tanya("NIM       : ")
+            nama     = tanya("Nama      : ")
+            id_prodi = tanya("ID Prodi  : ")
+            angkatan = tanya_angka("Angkatan  : ")
             if angkatan is None:
                 continue
-            if tambah_mahasiswa(nim, nama, id_prodi, angkatan):
-                catat_log(f"Tambah mahasiswa {nim}")
-                _ok("Mahasiswa ditambahkan")
+            hasil = services.tambah_mahasiswa(nim, nama, id_prodi, angkatan)
+            if hasil:
+                services.catat_log(f"Tambah mahasiswa {nim}")
+                sukses("Mahasiswa berhasil ditambahkan")
             else:
-                _fail("Gagal menambah mahasiswa")
+                gagal("Gagal — NIM mungkin sudah terdaftar atau data tidak lengkap")
+
         elif pilihan == 2:
-            data = lihat_semua_mahasiswa()
+            data = services.lihat_semua_mahasiswa()
             if data:
+                garis()
                 for item in data:
                     print(item)
-                catat_log("Lihat semua mahasiswa")
-                _ok("Data ditampilkan")
+                services.catat_log("Lihat semua mahasiswa")
+                sukses(f"{len(data)} mahasiswa ditampilkan")
             else:
-                _fail("Data mahasiswa kosong")
+                gagal("Belum ada data mahasiswa")
+
         elif pilihan == 3:
-            nim = _read_str("NIM: ")
-            data = cari_nim(nim)
+            nim  = tanya("NIM: ")
+            data = services.cari_nim(nim)
             if data:
                 print(data)
-                catat_log(f"Cari mahasiswa NIM {nim}")
-                _ok("Data ditemukan")
+                services.catat_log(f"Cari NIM {nim}")
+                sukses("Mahasiswa ditemukan")
             else:
-                _fail("Data tidak ditemukan")
+                gagal("Mahasiswa tidak ditemukan")
+
         elif pilihan == 4:
-            keyword = _read_str("Nama: ")
-            data = cari_nama(keyword)
+            nama = tanya("Nama: ")
+            data = services.cari_nama(nama)
             if data:
                 print(data)
-                catat_log(f"Cari mahasiswa nama {keyword}")
-                _ok("Data ditemukan")
+                services.catat_log(f"Cari nama {nama}")
+                sukses("Mahasiswa ditemukan")
             else:
-                _fail("Data tidak ditemukan")
+                gagal("Mahasiswa tidak ditemukan")
+
         elif pilihan == 5:
-            mode = _read_int("Sort 1=Nama, 2=IPK: ")
+            print("Urutkan berdasarkan:")
+            print("1. Nama")
+            print("2. IPK")
+            mode = tanya_angka("Pilih: ")
             if mode is None:
                 continue
-            key = "nama" if mode == 1 else "ipk"
-            data = sort_mahasiswa(key)
+            key  = "nama" if mode == 1 else "ipk"
+            data = services.sort_mahasiswa(key)
             if data:
+                garis()
                 for item in data:
                     print(item)
-                catat_log(f"Sort mahasiswa by {key}")
-                _ok("Data diurutkan")
+                services.catat_log(f"Sort mahasiswa by {key}")
+                sukses("Data berhasil diurutkan")
             else:
-                _fail("Gagal sort data")
-        elif pilihan == 6:
-            nim = _read_str("NIM: ")
-            if hapus_mahasiswa(nim):
-                catat_log(f"Hapus mahasiswa {nim}")
-                _ok("Mahasiswa dihapus")
-            else:
-                _fail("Gagal menghapus mahasiswa")
-        elif pilihan == 7:
-            data = jelajahi_mahasiswa()
-            if data:
-                idx = 0
-                while idx < len(data):
-                    print(data[idx])
-                    cmd = input("Enter=next, q=quit: ").strip().lower()
-                    if cmd == "q":
-                        break
-                    idx += 1
-                catat_log("Jelajahi mahasiswa circular")
-                _ok("Selesai jelajah")
-            else:
-                _fail("Data mahasiswa kosong")
-        else:
-            _fail("Menu tidak valid")
+                gagal("Tidak ada data untuk diurutkan")
 
+        elif pilihan == 6:
+            nim = tanya("NIM mahasiswa yang dihapus: ")
+            if services.hapus_mahasiswa(nim):
+                services.catat_log(f"Hapus mahasiswa {nim}")
+                sukses("Mahasiswa berhasil dihapus")
+            else:
+                gagal("Mahasiswa tidak ditemukan")
+
+        elif pilihan == 7:
+            data = services.jelajahi_mahasiswa()
+            if not data:
+                gagal("Belum ada data mahasiswa")
+                continue
+            print("\nJelajahi data — Enter untuk lanjut, 'q' untuk keluar")
+            garis()
+            for item in data:
+                print(item)
+                cmd = tanya("").lower()
+                if cmd == "q":
+                    break
+            services.catat_log("Jelajahi mahasiswa circular")
+            sukses("Selesai menjelajahi data")
+
+        else:
+            gagal("Pilihan tidak tersedia")
+
+
+# ---------------------------------------------------------------------------
+# Menu Mata Kuliah
+# ---------------------------------------------------------------------------
 
 def menu_matkul():
-    """Menu manajemen mata kuliah."""
+    """Menu untuk kelola data mata kuliah."""
     while True:
-        _header("Menu Mata Kuliah")
-        print(
-            "1. Tambah\n2. Lihat Semua\n3. Tambah Prasyarat\n4. Lihat Prasyarat\n0. Kembali"
-        )
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("MENU MATA KULIAH")
+        print("1. Tambah mata kuliah")
+        print("2. Lihat semua mata kuliah")
+        print("3. Tambah prasyarat")
+        print("4. Lihat prasyarat")
+        print("0. Kembali")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
             return
-        if pilihan == 1:
-            kode = _read_str("Kode: ")
-            nama = _read_str("Nama: ")
-            sks = _read_int("SKS: ")
-            semester = _read_int("Semester: ")
-            tipe = _read_str("Tipe: ")
+
+        elif pilihan == 1:
+            kode     = tanya("Kode MK   : ")
+            nama     = tanya("Nama MK   : ")
+            sks      = tanya_angka("SKS       : ")
+            semester = tanya_angka("Semester  : ")
+            tipe     = tanya("Tipe (wajib/pilihan): ")
             if sks is None or semester is None:
                 continue
-            if tambah_matkul(kode, nama, sks, semester, tipe):
-                catat_log(f"Tambah matkul {kode}")
-                _ok("Mata kuliah ditambahkan")
+            if services.tambah_matkul(kode, nama, sks, semester, tipe):
+                services.catat_log(f"Tambah matkul {kode}")
+                sukses("Mata kuliah berhasil ditambahkan")
             else:
-                _fail("Gagal menambah mata kuliah")
+                gagal("Gagal — kode mungkin sudah ada atau data tidak lengkap")
+
         elif pilihan == 2:
-            data = lihat_semua_matkul()
+            data = services.lihat_semua_matkul()
             if data:
+                garis()
                 for item in data:
                     print(item)
-                catat_log("Lihat semua matkul")
-                _ok("Data ditampilkan")
+                services.catat_log("Lihat semua matkul")
+                sukses(f"{len(data)} mata kuliah ditampilkan")
             else:
-                _fail("Data mata kuliah kosong")
-        elif pilihan == 3:
-            kode_mk = _read_str("Kode MK: ")
-            kode_prasyarat = _read_str("Kode Prasyarat: ")
-            if tambah_prasyarat(kode_mk, kode_prasyarat):
-                catat_log(f"Tambah prasyarat {kode_mk}->{kode_prasyarat}")
-                _ok("Prasyarat ditambahkan")
-            else:
-                _fail("Gagal menambah prasyarat")
-        elif pilihan == 4:
-            kode_mk = _read_str("Kode MK: ")
-            data = lihat_prasyarat(kode_mk)
-            if data:
-                print(", ".join(data))
-                catat_log(f"Lihat prasyarat {kode_mk}")
-                _ok("Prasyarat ditampilkan")
-            else:
-                _fail("Prasyarat tidak ditemukan")
-        else:
-            _fail("Menu tidak valid")
+                gagal("Belum ada data mata kuliah")
 
+        elif pilihan == 3:
+            kode_mk       = tanya("Kode MK          : ")
+            kode_prasyarat = tanya("Kode prasyaratnya: ")
+            if services.tambah_prasyarat(kode_mk, kode_prasyarat):
+                services.catat_log(f"Tambah prasyarat {kode_mk}->{kode_prasyarat}")
+                sukses("Prasyarat berhasil ditambahkan")
+            else:
+                gagal("Gagal — pastikan kode MK sudah terdaftar")
+
+        elif pilihan == 4:
+            kode_mk = tanya("Kode MK: ")
+            data    = services.lihat_prasyarat(kode_mk)
+            if data:
+                print(f"Prasyarat {kode_mk}: {', '.join(data)}")
+                services.catat_log(f"Lihat prasyarat {kode_mk}")
+                sukses("Prasyarat ditampilkan")
+            else:
+                gagal("Tidak ada prasyarat untuk mata kuliah ini")
+
+        else:
+            gagal("Pilihan tidak tersedia")
+
+
+# ---------------------------------------------------------------------------
+# Menu KRS
+# ---------------------------------------------------------------------------
 
 def menu_krs():
-    """Menu KRS."""
+    """Menu untuk kelola KRS mahasiswa."""
     while True:
-        _header("Menu KRS")
-        print("1. Ajukan KRS\n2. Proses KRS\n3. Lihat KRS\n0. Kembali")
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("MENU KRS")
+        print("1. Ajukan KRS (masuk antrian)")
+        print("2. Proses KRS (ambil dari antrian)")
+        print("3. Lihat KRS mahasiswa")
+        print("0. Kembali")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
             return
-        if pilihan == 1:
-            nim = _read_str("NIM: ")
-            if ajukan_krs(nim):
-                catat_log(f"Ajukan KRS {nim}")
-                _ok("KRS diajukan")
-            else:
-                _fail("Gagal ajukan KRS")
-        elif pilihan == 2:
-            nim = _read_str("NIM: ")
-            raw = _read_str("Kode MK (pisahkan koma): ")
-            list_kode = [item.strip() for item in raw.split(",") if item.strip()]
-            if proses_krs(nim, list_kode):
-                catat_log(f"Proses KRS {nim}")
-                _ok("KRS diproses")
-            else:
-                _fail("Gagal proses KRS")
-        elif pilihan == 3:
-            nim = _read_str("NIM: ")
-            data = lihat_krs(nim)
-            if data:
-                for item in data:
-                    print(item)
-                catat_log(f"Lihat KRS {nim}")
-                _ok("KRS ditampilkan")
-            else:
-                _fail("KRS tidak ditemukan")
-        else:
-            _fail("Menu tidak valid")
 
+        elif pilihan == 1:
+            nim = tanya("NIM: ")
+            if services.ajukan_krs(nim):
+                services.catat_log(f"Ajukan KRS {nim}")
+                sukses("KRS masuk antrian")
+            else:
+                gagal("Gagal — NIM tidak ditemukan atau belum terdaftar")
+
+        elif pilihan == 2:
+            nim = tanya("NIM yang diproses: ")
+            raw = tanya("Kode MK yang diambil (pisah koma, contoh: MK001,MK002): ")
+            list_kode = [k.strip() for k in raw.split(",") if k.strip()]
+            if services.proses_krs(nim, list_kode):
+                services.catat_log(f"Proses KRS {nim}")
+                sukses("KRS berhasil diproses")
+            else:
+                gagal("Gagal — pastikan NIM sudah ada di antrian")
+
+        elif pilihan == 3:
+            nim  = tanya("NIM: ")
+            data = services.lihat_krs(nim)
+            if data:
+                garis()
+                print(f"KRS mahasiswa {nim}:")
+                for kode in data:
+                    print(f"  - {kode}")
+                services.catat_log(f"Lihat KRS {nim}")
+                sukses("KRS ditampilkan")
+            else:
+                gagal("KRS belum ada untuk mahasiswa ini")
+
+        else:
+            gagal("Pilihan tidak tersedia")
+
+
+# ---------------------------------------------------------------------------
+# Menu Nilai
+# ---------------------------------------------------------------------------
 
 def menu_nilai():
-    """Menu penilaian dan IPK."""
+    """Menu untuk input dan lihat nilai mahasiswa."""
     while True:
-        _header("Menu Nilai")
-        print("1. Input Nilai\n2. Lihat Nilai\n3. Hitung IPK\n0. Kembali")
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("MENU NILAI")
+        print("1. Input nilai")
+        print("2. Lihat nilai mahasiswa")
+        print("3. Hitung IPK")
+        print("0. Kembali")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
             return
-        if pilihan == 1:
-            nim = _read_str("NIM: ")
-            kode_mk = _read_str("Kode MK: ")
-            tugas = _read_float("Tugas: ")
-            uts = _read_float("UTS: ")
-            uas = _read_float("UAS: ")
+
+        elif pilihan == 1:
+            nim     = tanya("NIM      : ")
+            kode_mk = tanya("Kode MK  : ")
+            tugas   = tanya_desimal("Tugas    : ")
+            uts     = tanya_desimal("UTS      : ")
+            uas     = tanya_desimal("UAS      : ")
             if None in (tugas, uts, uas):
                 continue
-            if input_nilai(nim, kode_mk, tugas, uts, uas):
-                catat_log(f"Input nilai {nim}-{kode_mk}")
-                _ok("Nilai disimpan")
+            if services.input_nilai(nim, kode_mk, tugas, uts, uas):
+                services.catat_log(f"Input nilai {nim} - {kode_mk}")
+                sukses("Nilai berhasil disimpan")
             else:
-                _fail("Gagal simpan nilai")
+                gagal("Gagal — pastikan nilai antara 0-100")
+
         elif pilihan == 2:
-            nim = _read_str("NIM: ")
-            data = lihat_nilai(nim)
+            nim  = tanya("NIM: ")
+            data = services.lihat_nilai(nim)
             if data:
+                garis()
                 for item in data:
                     print(item)
-                catat_log(f"Lihat nilai {nim}")
-                _ok("Nilai ditampilkan")
+                services.catat_log(f"Lihat nilai {nim}")
+                sukses("Nilai ditampilkan")
             else:
-                _fail("Nilai tidak ditemukan")
-        elif pilihan == 3:
-            nim = _read_str("NIM: ")
-            ipk = hitung_ipk_mahasiswa(nim)
-            if ipk is not None:
-                print(f"IPK: {ipk}")
-                catat_log(f"Hitung IPK {nim}")
-                _ok("IPK dihitung")
-            else:
-                _fail("Gagal hitung IPK")
-        else:
-            _fail("Menu tidak valid")
+                gagal("Belum ada nilai untuk mahasiswa ini")
 
+        elif pilihan == 3:
+            nim = tanya("NIM: ")
+            ipk = services.hitung_ipk_mahasiswa(nim)
+            if ipk is not None:
+                garis()
+                print(f"IPK mahasiswa {nim}: {ipk}")
+                services.catat_log(f"Hitung IPK {nim}")
+                sukses("IPK berhasil dihitung")
+            else:
+                gagal("Belum ada nilai untuk dihitung")
+
+        else:
+            gagal("Pilihan tidak tersedia")
+
+
+# ---------------------------------------------------------------------------
+# Menu Log
+# ---------------------------------------------------------------------------
 
 def menu_log():
-    """Menu aktivitas log."""
-    _header("Activity Log")
-    data = tampil_log()
+    """Tampilkan riwayat aktivitas dari Stack."""
+    garis()
+    print("ACTIVITY LOG (terbaru di atas)")
+    garis()
+    data = services.tampil_log()
     if data:
         for item in data:
-            print(item)
-        _ok("Log ditampilkan")
+            print(f"  {item}")
+        sukses(f"{len(data)} aktivitas tercatat")
     else:
-        _fail("Log kosong")
+        gagal("Log masih kosong")
 
+
+# ---------------------------------------------------------------------------
+# Menu Struktur Akademik
+# ---------------------------------------------------------------------------
 
 def menu_struktur_akademik():
-    """Menu struktur akademik (Tree)."""
+    """Menu untuk kelola hierarki akademik via Tree."""
     while True:
-        _header("Menu Struktur Akademik")
-        print("1. Tambah Node\n2. Tampilkan Hierarki\n0. Kembali")
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("MENU STRUKTUR AKADEMIK (Tree)")
+        print("1. Tambah node (contoh: Fakultas -> Prodi)")
+        print("2. Tampilkan hierarki")
+        print("0. Kembali")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
             return
-        if pilihan == 1:
-            parent = _read_str("Parent: ")
-            child = _read_str("Child: ")
-            if tambah_node_tree(parent, child):
-                catat_log(f"Tambah node tree {parent}->{child}")
-                _ok("Node ditambahkan")
-            else:
-                _fail("Gagal menambah node")
-        elif pilihan == 2:
-            data = tampil_tree()
-            if data:
-                if isinstance(data, list):
-                    for item in data:
-                        print(item)
-                else:
-                    print(data)
-                catat_log("Tampilkan struktur akademik")
-                _ok("Hierarki ditampilkan")
-            else:
-                _fail("Struktur akademik kosong")
-        else:
-            _fail("Menu tidak valid")
 
+        elif pilihan == 1:
+            parent = tanya("Parent (contoh: UNRI atau FMIPA): ")
+            child  = tanya("Child  (contoh: FMIPA atau Informatika): ")
+            if services.tambah_node_tree(parent, child):
+                services.catat_log(f"Tambah node {parent} -> {child}")
+                sukses("Node berhasil ditambahkan")
+            else:
+                gagal("Gagal — pastikan parent sudah ada di Tree")
+
+        elif pilihan == 2:
+            garis()
+            print("Hierarki Akademik:")
+            services.tampil_tree()
+            services.catat_log("Tampilkan struktur akademik")
+
+        else:
+            gagal("Pilihan tidak tersedia")
+
+
+# ---------------------------------------------------------------------------
+# Menu Utama
+# ---------------------------------------------------------------------------
 
 def menu_utama():
-    """Menu utama aplikasi."""
+    """Menu utama — pintu masuk semua fitur DUA UNRI."""
     while True:
-        _header("SIAKAD Lite")
-        print(
-            "1. Mahasiswa\n2. Mata Kuliah\n3. KRS\n4. Nilai\n5. Log\n6. Struktur Akademik\n0. Keluar"
-        )
-        pilihan = _read_int("Pilih: ")
+        garis()
+        print("DUA UNRI — Sistem Informasi Akademik")
+        print("1. Mahasiswa")
+        print("2. Mata Kuliah")
+        print("3. KRS")
+        print("4. Nilai & IPK")
+        print("5. Activity Log")
+        print("6. Struktur Akademik")
+        print("0. Keluar")
+
+        pilihan = tanya_angka("Pilih menu: ")
         if pilihan is None:
             continue
+
         if pilihan == 0:
-            _ok("Keluar")
+            sukses("Sampai jumpa!")
             return
-        if pilihan == 1:
+        elif pilihan == 1:
             menu_mahasiswa()
         elif pilihan == 2:
             menu_matkul()
@@ -350,7 +442,7 @@ def menu_utama():
         elif pilihan == 6:
             menu_struktur_akademik()
         else:
-            _fail("Menu tidak valid")
+            gagal("Pilihan tidak tersedia")
 
 
 if __name__ == "__main__":

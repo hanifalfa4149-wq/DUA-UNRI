@@ -1,101 +1,124 @@
-"""Algoritma sorting, searching, dan rekursif untuk SIAKAD Lite."""
+"""Algoritma sorting, searching, dan rekursif untuk DUA UNRI."""
 
 
-def _get_value(item, key):
-    """Ambil nilai field dari dict atau object secara aman."""
+def ambil_nilai(item, key):
+    """Ambil nilai dari dict atau object berdasarkan key secara aman."""
     if isinstance(item, dict):
         return item.get(key)
     return getattr(item, key, None)
 
 
 def bubble_sort(arr, key):
-    """Urutkan list secara in-place dengan bubble sort berdasarkan key."""
+    """Urutkan list dengan bubble sort berdasarkan key — Sorting."""
     n = len(arr)
     for i in range(n):
-        swapped = False
+        ada_pertukaran = False
         for j in range(0, n - i - 1):
-            left = _get_value(arr[j], key)
-            right = _get_value(arr[j + 1], key)
-            if left is not None and right is not None and left > right:
+            kiri = ambil_nilai(arr[j], key)
+            kanan = ambil_nilai(arr[j + 1], key)
+            if kiri is not None and kanan is not None and kiri > kanan:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
-                swapped = True
-        if not swapped:
+                ada_pertukaran = True
+        # Kalau tidak ada pertukaran, data sudah terurut — berhenti lebih awal
+        if not ada_pertukaran:
             break
     return arr
 
 
 def insertion_sort(arr, key):
-    """Urutkan list secara in-place dengan insertion sort berdasarkan key."""
+    """Urutkan list dengan insertion sort berdasarkan key — Sorting."""
     for i in range(1, len(arr)):
-        current = arr[i]
-        current_value = _get_value(current, key)
+        item_sekarang = arr[i]
+        nilai_sekarang = ambil_nilai(item_sekarang, key)
         j = i - 1
+        # Geser item ke kanan selama nilainya lebih besar dari item_sekarang
         while j >= 0:
-            prev_value = _get_value(arr[j], key)
+            nilai_sebelum = ambil_nilai(arr[j], key)
             if (
-                prev_value is None
-                or current_value is None
-                or prev_value <= current_value
+                nilai_sebelum is None
+                or nilai_sekarang is None
+                or nilai_sebelum <= nilai_sekarang
             ):
                 break
             arr[j + 1] = arr[j]
             j -= 1
-        arr[j + 1] = current
+        arr[j + 1] = item_sekarang
     return arr
 
 
 def linear_search(arr, keyword, field):
-    """Cari item secara linear berdasarkan field, case insensitive."""
+    """Cari item satu per satu berdasarkan field, tidak case sensitive — Searching."""
     if keyword is None:
         return None
     target = str(keyword).lower()
     for item in arr:
-        value = _get_value(item, field)
-        if value is None:
+        nilai = ambil_nilai(item, field)
+        if nilai is None:
             continue
-        if str(value).lower() == target:
+        if str(nilai).lower() == target:
             return item
     return None
 
 
 def binary_search(arr, nim):
-    """Cari item by NIM pada list yang sudah terurut naik berdasarkan nim."""
-    left = 0
-    right = len(arr) - 1
+    """Cari mahasiswa by NIM di list yang sudah terurut — Searching."""
+    kiri = 0
+    kanan = len(arr) - 1
     target = str(nim)
-    while left <= right:
-        mid = (left + right) // 2
-        mid_value = _get_value(arr[mid], "nim")
-        if mid_value is None:
+    while kiri <= kanan:
+        tengah = (kiri + kanan) // 2
+        nilai_tengah = ambil_nilai(arr[tengah], "nim")
+        if nilai_tengah is None:
             return None
-        mid_str = str(mid_value)
-        if mid_str == target:
-            return arr[mid]
-        if mid_str < target:
-            left = mid + 1
+        nilai_tengah = str(nilai_tengah)
+        if nilai_tengah == target:
+            return arr[tengah]  # Ketemu
+        if nilai_tengah < target:
+            kiri = tengah + 1  # Cari di sebelah kanan
         else:
-            right = mid - 1
+            kanan = tengah - 1  # Cari di sebelah kiri
     return None
 
 
 def hitung_ipk(nilai_list, index=0, trace=False):
-    """Hitung IPK kumulatif secara rekursif dari list nilai."""
+    """Jumlahkan semua nilai secara rekursif — Rekursif."""
+    # Base case: kalau index sudah melewati akhir list, kembalikan 0
     if index >= len(nilai_list):
         return 0.0
     nilai = nilai_list[index]
     if trace:
-        print(f"trace index={index} nilai={nilai}")
+        print(f"  rekursif ke-{index}: nilai={nilai}")
+    # Rekursif: nilai sekarang + jumlah nilai berikutnya
     return float(nilai) + hitung_ipk(nilai_list, index + 1, trace)
 
 
+# ---------------------------------------------------------------------------
+# Demo isolated — jalankan: python algoritma.py
+# ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    demo = [
+    data = [
         {"nim": "22001", "nama": "Budi", "ipk": 3.1},
         {"nim": "22003", "nama": "Citra", "ipk": 3.6},
         {"nim": "22002", "nama": "Ani", "ipk": 3.4},
     ]
-    bubble_sort(demo, "nim")
-    insertion_sort(demo, "nama")
-    linear_search(demo, "ani", "nama")
-    binary_search(demo, "22002")
-    hitung_ipk([3.0, 3.5, 3.8], trace=True)
+
+    print("=== Bubble Sort by NIM ===")
+    hasil = bubble_sort(data.copy(), "nim")
+    for item in hasil:
+        print(f"  {item['nim']} - {item['nama']}")
+
+    print("\n=== Insertion Sort by Nama ===")
+    hasil = insertion_sort(data.copy(), "nama")
+    for item in hasil:
+        print(f"  {item['nama']}")
+
+    print("\n=== Linear Search nama 'ani' ===")
+    print(f"  hasil: {linear_search(data, 'ani', 'nama')}")
+
+    print("\n=== Binary Search NIM '22002' ===")
+    terurut = bubble_sort(data.copy(), "nim")
+    print(f"  hasil: {binary_search(terurut, '22002')}")
+
+    print("\n=== Rekursif hitung_ipk [3.0, 3.5, 3.8] ===")
+    total = hitung_ipk([3.0, 3.5, 3.8], trace=True)
+    print(f"  total: {total} | rata-rata: {round(total / 3, 2)}")

@@ -66,7 +66,7 @@ Sesuai dengan *Product Requirements Document* (PRD), proyek ini mengimplementasi
 Arsitektur aplikasi dibagi menjadi 4 layer utama (*MVC-like pattern*):
 
 ```text
-siakad_lite/
+dua_unri/
 ├── main.py                 # Entry point aplikasi (Jalankan file ini)
 ├── data/                   # File persistensi berformat JSON (mahasiswa, matkul, krs, nilai)
 ├── models/                 # Definisi Class entitas/OOP (Mahasiswa, MataKuliah, dll)
@@ -96,4 +96,4 @@ siakad_lite/
 4. **Mulai Navigasi**: Ikuti instruksi di layar terminal dengan menginputkan angka menu. Setiap perubahan data akan otomatis tersimpan dalam format JSON di dalam folder `data/`.
 
 ---
-> *Dokumen ini diselaraskan dengan PRD Internal SIAKAD Lite v1.0 untuk evaluasi Capstone Project Algoritma & Struktur Data.*
+> *Dokumen ini diselaraskan dengan PRD Internal DUA UNRI v1.0 untuk evaluasi Capstone Project Algoritma & Struktur Data.*

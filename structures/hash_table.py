@@ -1,5 +1,5 @@
 """
-Hash Table dengan separate chaining untuk SIAKAD Lite.
+Hash Table dengan separate chaining untuk DUA UNRI.
 
 Implementasi manual tanpa dict Python sebagai storage utama.
 Collision diselesaikan dengan linked list per bucket (separate chaining).
@@ -28,7 +28,7 @@ class HashTable:
     """
     Hash Table dengan separate chaining untuk lookup data mahasiswa by NIM.
 
-    Dipakai di SIAKAD Lite karena NIM bersifat unik sehingga cocok sebagai key,
+    Dipakai di DUA UNRI karena NIM bersifat unik sehingga cocok sebagai key,
     dan Hash Table memberikan lookup O(1) average — jauh lebih cepat dari
     linear search O(n) saat data mahasiswa banyak.
 

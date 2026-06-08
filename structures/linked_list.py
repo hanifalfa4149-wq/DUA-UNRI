@@ -1,5 +1,5 @@
 # structures/linked_list.py
-# Anggota 1 — SIAKAD Lite Capstone Project
+# Anggota 1 — DUA UNRI Capstone Project
 # Single Linked List, Double Linked List, Circular Linked List
 
 
@@ -9,7 +9,7 @@
 #  Setiap node hanya tahu satu hal: siapa node BERIKUTNYA.
 #  Tidak bisa balik — kalau sudah lewat, tidak bisa ke belakang.
 #
-#  Di SIAKAD, Single LL dipakai untuk menyimpan daftar mata kuliah
+#  Di DUA UNRI, Single LL dipakai untuk menyimpan daftar mata kuliah
 #  per mahasiswa (KRS) — ukurannya tidak tetap, dinamis.
 #
 #  Visualisasi:
@@ -33,10 +33,10 @@ class SLLNode:
         self.next = None
 
 
-class SingleLinkedList:
+class SingleLL:
     """
     Single Linked List — rantai node satu arah.
-    Dipakai untuk daftar mata kuliah per mahasiswa di SIAKAD Lite.
+    Dipakai untuk daftar mata kuliah per mahasiswa di DUA UNRI.
     """
 
     def __init__(self):
@@ -121,7 +121,7 @@ class SingleLinkedList:
 #  dan ke node BERIKUTNYA (next).
 #  Beda dari Single LL — bisa jalan maju DAN mundur.
 #
-#  Di SIAKAD, Double LL dipakai untuk navigasi riwayat nilai:
+#  Di DUA UNRI, Double LL dipakai untuk navigasi riwayat nilai:
 #  bisa scroll ke nilai sebelumnya (prev) atau berikutnya (next).
 #
 #  Visualisasi:
@@ -148,10 +148,10 @@ class DLLNode:
         self.next = None
 
 
-class DoubleLinkedList:
+class DoubleLL:
     """
     Double Linked List — rantai node dua arah.
-    Dipakai untuk navigasi riwayat nilai di SIAKAD Lite.
+    Dipakai untuk navigasi riwayat nilai di DUA UNRI.
     """
 
     def __init__(self):
@@ -239,7 +239,7 @@ class DoubleLinkedList:
 #  Sama seperti Single LL, tapi node TERAKHIR tidak menunjuk ke None —
 #  melainkan menunjuk kembali ke HEAD. Membentuk lingkaran.
 #
-#  Di SIAKAD, Circular LL dipakai untuk navigasi carousel di views:
+#  Di DUA UNRI, Circular LL dipakai untuk navigasi carousel di views:
 #  menu terus berputar dan tidak ada ujungnya.
 #
 #  Visualisasi:
@@ -266,10 +266,10 @@ class CLLNode:
         self.next = None
 
 
-class CircularLinkedList:
+class CircularLL:
     """
     Circular Linked List — rantai node yang membentuk lingkaran.
-    Dipakai untuk navigasi carousel menu di SIAKAD Lite.
+    Dipakai untuk navigasi carousel menu di DUA UNRI.
     """
 
     def __init__(self):
@@ -396,7 +396,7 @@ if __name__ == "__main__":
     print("  DEMO SINGLE LINKED LIST")
     print("=" * 55)
 
-    sll = SingleLinkedList()
+    sll = SingleLL()
 
     print("\n[1] Append: Andi, Budi, Citra, Dian")
     sll.append("Andi")
@@ -436,7 +436,7 @@ if __name__ == "__main__":
     print("  DEMO DOUBLE LINKED LIST")
     print("=" * 55)
 
-    dll = DoubleLinkedList()
+    dll = DoubleLL()
 
     print("\n[1] Append: X, Y, Z")
     dll.append("X")
@@ -473,7 +473,7 @@ if __name__ == "__main__":
     print("  DEMO CIRCULAR LINKED LIST")
     print("=" * 55)
 
-    cll = CircularLinkedList()
+    cll = CircularLL()
 
     print("\n[1] Append: Senin, Selasa, Rabu, Kamis")
     cll.append("Senin")

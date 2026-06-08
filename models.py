@@ -1,5 +1,5 @@
 """
-Entitas model SIAKAD Lite: Mahasiswa, MataKuliah, KRS, Nilai.
+Entitas model DUA UNRI: Mahasiswa, MataKuliah, KRS, Nilai.
 
 Setiap class mengimplementasikan:
 - __init__  : inisialisasi atribut (dengan type hint)

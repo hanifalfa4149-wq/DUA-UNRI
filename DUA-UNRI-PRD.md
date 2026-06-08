@@ -1,4 +1,4 @@
-# SIAKAD Lite — Product Requirements Document (PRD)
+# DUA UNRI — Product Requirements Document (PRD)
 
 > Version: 2.0 | Status: Active | Last Updated: Mei 2026
 
@@ -6,7 +6,7 @@
 
 ## 1. Overview
 
-SIAKAD Lite adalah simulasi sistem informasi akademik berbasis terminal (CLI) menggunakan Python,
+DUA UNRI adalah simulasi sistem informasi akademik berbasis terminal (CLI) menggunakan Python,
 mencakup alur akademik dasar — manajemen mahasiswa, mata kuliah, KRS, dan penilaian —
 dengan seluruh fiturnya diimplementasikan langsung menggunakan struktur data dan algoritma
 seperti linked list, stack, queue, tree, graph, dan hash table.
@@ -39,7 +39,7 @@ dan algoritma dalam konteks sistem nyata.
 ## 3. Folder Structure
 
 ```
-siakad_lite/
+dua_unri/
 ├── main.py              # Entry point, router utama (~30 baris)
 ├── models.py            # Semua class entitas (~80 baris)
 ├── algoritma.py         # Sorting, searching, rekursif (~60 baris)

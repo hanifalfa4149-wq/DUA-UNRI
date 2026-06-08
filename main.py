@@ -1,12 +1,10 @@
-"""Entry point SIAKAD Lite."""
-
 from views import menu_utama
 
 
 def _banner():
     """Tampilkan banner aplikasi."""
     print("=" * 40)
-    print("SIAKAD Lite — CLI Akademik")
+    print("DUA UNRI — CLI Akademik")
     print("=" * 40)
 
 
