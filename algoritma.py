@@ -97,9 +97,9 @@ def hitung_ipk(nilai_list, index=0, trace=False):
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     data = [
-        {"nim": "22001", "nama": "Budi", "ipk": 3.1},
-        {"nim": "22003", "nama": "Citra", "ipk": 3.6},
-        {"nim": "22002", "nama": "Ani", "ipk": 3.4},
+        {"nim": "22001", "nama": "Hanif", "ipk": 3.1},
+        {"nim": "22003", "nama": "Habib", "ipk": 3.6},
+        {"nim": "22002", "nama": "Riva", "ipk": 3.4},
     ]
 
     print("=== Bubble Sort by NIM ===")

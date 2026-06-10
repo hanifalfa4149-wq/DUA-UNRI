@@ -94,6 +94,3 @@ dua_unri/
    python main.py
    ```
 4. **Mulai Navigasi**: Ikuti instruksi di layar terminal dengan menginputkan angka menu. Setiap perubahan data akan otomatis tersimpan dalam format JSON di dalam folder `data/`.
-
----
-> *Dokumen ini diselaraskan dengan PRD Internal DUA UNRI v1.0 untuk evaluasi Capstone Project Algoritma & Struktur Data.*

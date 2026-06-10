@@ -2,7 +2,6 @@
 
 import services
 
-
 # ---------------------------------------------------------------------------
 # Helper tampilan & input
 # ---------------------------------------------------------------------------
@@ -14,32 +13,32 @@ def garis():
 
 def sukses(pesan):
     """Cetak pesan sukses."""
-    print(f"✓ {pesan}")
+    print(f"{pesan}")
 
 
 def gagal(pesan):
     """Cetak pesan gagal."""
-    print(f"✗ {pesan}")
+    print(f"{pesan}")
 
 
-def tanya(prompt):
+def tanya(input):
     """Minta input teks dari user."""
-    return input(prompt).strip()
+    return input(input).strip()
 
 
-def tanya_angka(prompt):
+def tanya_angka(input):
     """Minta input angka bulat dari user, return None jika tidak valid."""
     try:
-        return int(input(prompt).strip())
+        return int(input(input).strip())
     except ValueError:
         gagal("Input harus berupa angka")
         return None
 
 
-def tanya_desimal(prompt):
+def tanya_desimal(input):
     """Minta input angka desimal dari user, return None jika tidak valid."""
     try:
-        return float(input(prompt).strip())
+        return float(input(input).strip())
     except ValueError:
         gagal("Input harus berupa angka")
         return None
