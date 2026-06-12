@@ -282,12 +282,12 @@ if __name__ == "__main__":
 
     tree = Tree("UNRI")
     tree.insert("UNRI", "FMIPA")
-    tree.insert("UNRI", "Teknik")
-    tree.insert("FMIPA", "Informatika")
+    tree.insert("UNRI", "FT")
+    tree.insert("FT", "Informatika")
     tree.insert("FMIPA", "Matematika")
-    tree.insert("Teknik", "Teknik Sipil")
-    tree.insert("Informatika", "Andi Pratama")
-    tree.insert("Informatika", "Budi Santoso")
+    tree.insert("FT", "Teknik Sipil")
+    tree.insert("Informatika", "hanif")
+    tree.insert("Informatika", "habib")
     tree.insert("Informatika", "Citra Dewi")
     tree.insert("Matematika", "Dian Rahmawati")
     tree.insert("Teknik Sipil", "Eko Prasetyo")
@@ -297,7 +297,7 @@ if __name__ == "__main__":
 
     print("\n[Search di Tree]")
     print(f"  search('Informatika') -> {tree.search('Informatika')}")
-    print(f"  search('Budi Santoso') -> {tree.search('Budi Santoso')}")
+    print(f"  search('habib') -> {tree.search('habib')}")
     print(f"  search('Kedokteran')   -> {tree.search('Kedokteran')}")
 
     print("\n[get_children]")

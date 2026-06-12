@@ -6,8 +6,8 @@
 # ================================================================
 #  STACK
 #
-#  Stack itu kayak tumpukan piring — piring yang terakhir kamu
-#  taruh di atas, itu yang pertama kamu ambil.
+#  Stack itu kayak tumpukan buku — buku yang terakhir kita
+#  taruh di atas, itu yang pertama kita ambil.
 #
 #  Sifatnya: LIFO (Last In First Out)
 #
@@ -110,7 +110,7 @@ class Stack:
 #
 #  Visualisasi:
 #
-#    FRONT  →  [Andi]  →  [Budi]  →  [Citra]  →  None
+#    FRONT  →  [Habib]  →  [riva]  →  [Hanif]  →  None
 #              (duluan)                (belakangan)
 #                                          ↑
 #                                        REAR
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     stack = Stack()
 
     print("\n[1] Push 3 aksi ke log:")
-    stack.push("Login: Andi")
+    stack.push("Login: Habib")
     stack.push("Tambah MK: Algoritma")
     stack.push("Submit KRS")
     stack.display()
@@ -261,10 +261,10 @@ if __name__ == "__main__":
     queue = Queue()
 
     print("\n[1] Enqueue 4 mahasiswa ke antrian KRS:")
-    queue.enqueue("2110101001 - Andi")
-    queue.enqueue("2110101002 - Budi")
-    queue.enqueue("2110101003 - Citra")
-    queue.enqueue("2110101004 - Dian")
+    queue.enqueue("2110101001 - habib")
+    queue.enqueue("2110101002 - hanif")
+    queue.enqueue("2110101003 - riva")
+    queue.enqueue("2110101004 - farel")
     queue.display()
 
     print(f"\n[2] Peek — giliran pertama: '{queue.peek()}'")
@@ -275,7 +275,7 @@ if __name__ == "__main__":
     queue.display()
 
     print("\n[4] Enqueue mahasiswa baru (daftar belakangan):")
-    queue.enqueue("2110101005 - Eka")
+    queue.enqueue("2110101005 - syikbi")
     queue.display()
 
     print("\n[5] Proses semua antrian sampai habis:")

@@ -237,7 +237,7 @@ if __name__ == "__main__":
 
     # --- Mahasiswa ---
     print("\n[Mahasiswa]")
-    mhs = Mahasiswa("2201001", "Andi Pratama", "TIF", 2022)
+    mhs = Mahasiswa("2201001", "Habib Ganteng", "TIF", 2025)
     print(mhs)
     d = mhs.to_dict()
     print("to_dict :", d)

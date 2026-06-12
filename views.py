@@ -21,24 +21,24 @@ def gagal(pesan):
     print(f"{pesan}")
 
 
-def tanya(input):
+def tanya(prompt):
     """Minta input teks dari user."""
-    return input(input).strip()
+    return input(prompt).strip()
 
 
-def tanya_angka(input):
+def tanya_angka(prompt):
     """Minta input angka bulat dari user, return None jika tidak valid."""
     try:
-        return int(input(input).strip())
+        return int(input(prompt).strip())
     except ValueError:
         gagal("Input harus berupa angka")
         return None
 
 
-def tanya_desimal(input):
+def tanya_desimal(prompt):
     """Minta input angka desimal dari user, return None jika tidak valid."""
     try:
-        return float(input(input).strip())
+        return float(input(prompt).strip())
     except ValueError:
         gagal("Input harus berupa angka")
         return None
@@ -386,8 +386,8 @@ def menu_struktur_akademik():
             return
 
         elif pilihan == 1:
-            parent = tanya("Parent (contoh: UNRI atau FMIPA): ")
-            child  = tanya("Child  (contoh: FMIPA atau Informatika): ")
+            parent = tanya("Parent (contoh: UNRI atau FT): ")
+            child  = tanya("Child  (contoh: FT atau Informatika): ")
             if services.tambah_node_tree(parent, child):
                 services.catat_log(f"Tambah node {parent} -> {child}")
                 sukses("Node berhasil ditambahkan")

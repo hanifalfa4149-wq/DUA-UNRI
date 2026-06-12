@@ -180,11 +180,11 @@ if __name__ == "__main__":
     # --- Insert ---
     print("\n[Insert 5 mahasiswa]")
     data = [
-        ("2201001", {"nim": "2201001", "nama": "Andi Pratama",   "id_prodi": "TIF", "angkatan": 2022}),
-        ("2201002", {"nim": "2201002", "nama": "Budi Santoso",   "id_prodi": "TIF", "angkatan": 2022}),
-        ("2201003", {"nim": "2201003", "nama": "Citra Dewi",     "id_prodi": "TIF", "angkatan": 2022}),
-        ("2201004", {"nim": "2201004", "nama": "Dian Rahmawati", "id_prodi": "SIF", "angkatan": 2022}),
-        ("2301001", {"nim": "2301001", "nama": "Eko Prasetyo",   "id_prodi": "TIF", "angkatan": 2023}),
+        ("2201001", {"nim": "2201001", "nama": "Habib",   "id_prodi": "TIF", "angkatan": 2025}),
+        ("2201002", {"nim": "2201002", "nama": "Riva",   "id_prodi": "TIF", "angkatan": 2025}),
+        ("2201003", {"nim": "2201003", "nama": "Hanif",     "id_prodi": "TIF", "angkatan": 2025}),
+        ("2201004", {"nim": "2201004", "nama": "farel", "id_prodi": "SIF", "angkatan": 2025}),
+        ("2301001", {"nim": "2301001", "nama": "Reza",   "id_prodi": "TIF", "angkatan": 2025}),
     ]
     for key, val in data:
         ht.insert(key, val)
@@ -204,7 +204,7 @@ if __name__ == "__main__":
 
     # --- Update ---
     print("\n[Update key yang sudah ada]")
-    ht.insert("2201001", {"nim": "2201001", "nama": "Andi UPDATED", "id_prodi": "TIF", "angkatan": 2022})
+    ht.insert("2201001", {"nim": "2201001", "nama": "habib UPDATED", "id_prodi": "TIF", "angkatan": 2022})
     print(f"  search('2201001') -> {ht.search('2201001')}")
 
     # --- Delete ---

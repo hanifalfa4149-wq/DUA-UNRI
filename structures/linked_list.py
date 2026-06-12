@@ -14,7 +14,7 @@
 #
 #  Visualisasi:
 #
-#    HEAD  →  [Andi|next]  →  [Budi|next]  →  [Citra|next]  →  None
+#    HEAD  →  [Hanif|next]  →  [Habib|next]  →  [Riva|next]  →  None
 #             (pertama)                         (terakhir)
 #
 #  Operasi utama:
